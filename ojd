@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #online-judge-toolsコマンドを利用して、atcoderのテストサンプルを一括ダウンロードする
-echo -n "contest id:"
-read cid
+#usage: ojd contestid
+cid=$1
 mkdir -p $cid/{A..E}
 
 for dir in {A..E}
