@@ -1,11 +1,16 @@
 #!/bin/bash
 
-#online-judge-toolsコマンドを利用して、atcoderのテストサンプルを一括ダウンロードする
+#online-judge-toolsコマンドを利用して、atcoderのA～Eのテストサンプルを一括ダウンロードする
+#downloadする際に、dオプションで出力ディレクトリを指定できるが、URLの履歴ファイル（download-history.jsonl）に出力されない仕様になっているため、逐一ディレクトリを変更するように修正
 #usage: ojd contestid
+
 cid=$1
 mkdir -p $cid/{A..E}
 
 for dir in {A..E}
 do
-  oj download -d "${cid}/${dir}/test" "https://atcoder.jp/contests/${cid}/tasks/${cid}_${dir,}"
+  pushd $cid/$dir
+  oj d "https://atcoder.jp/contests/${cid}/tasks/${cid}_${dir,}"
+  touch main.php
+  popd
 done
